@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{90D08BD6-9733-4D17-A28D-7957D621C4A3}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ClientDocuments.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test\ClientDocumentsTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ClientDocuments">
+        <MSBuild Projects="ClientDocuments.dproj"/>
+    </Target>
+    <Target Name="ClientDocuments:Clean">
+        <MSBuild Projects="ClientDocuments.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ClientDocuments:Make">
+        <MSBuild Projects="ClientDocuments.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ClientDocumentsTests">
+        <MSBuild Projects="Test\ClientDocumentsTests.dproj"/>
+    </Target>
+    <Target Name="ClientDocumentsTests:Clean">
+        <MSBuild Projects="Test\ClientDocumentsTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ClientDocumentsTests:Make">
+        <MSBuild Projects="Test\ClientDocumentsTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ClientDocuments;ClientDocumentsTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ClientDocuments:Clean;ClientDocumentsTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ClientDocuments:Make;ClientDocumentsTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
